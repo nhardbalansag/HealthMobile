@@ -16,15 +16,18 @@ import {
     isIphoneX 
 } from '../styles/styles';
 
+import AppTitle from '../components/appTitle';
+
 const SplashScreen = () =>{
     return(
-        <SafeAreaView>
-            <ScrollView>
-                <View>
-                    <Text>Splash Screen Here</Text>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <View style={[styles.flex1, styles.justifyCenter, styles.alignCenter]}>
+            <AppTitle/>
+            <View>
+                <Text>
+                    powered by Bernard Balansag
+                </Text>
+            </View>
+        </View>
     );
 }
 
