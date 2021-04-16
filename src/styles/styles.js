@@ -19,7 +19,8 @@ const gray300      = '#696969';
 const gray400      = '#575757';
 const gray500      = '#f8f9fa';
 const gray600      = '#818181';
-const blue100      = '#EAF5FF'
+const blue100      = '#EAF5FF'; 
+const goldenrod    = '#daa520'; 
 
 const colors = {
   baseColor   : baseColor,
@@ -41,6 +42,7 @@ const colors = {
   gray500     : gray500,
   gray600     : gray600,
   blue100     : blue100,
+  goldenrod   : goldenrod,
 };
 
 const PLATFORM = {
@@ -1198,7 +1200,6 @@ modalView: {
     paddingTop: baseWidth * 2,
     backgroundColor: 'rgba(0,0,0,0.3)'
   },
-
   modalContent: {
     backgroundColor: colors.lightColor,
     marginTop: baseWidth,
