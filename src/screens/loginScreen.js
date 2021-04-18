@@ -70,17 +70,15 @@ const LoginScreen = () =>{
         <SafeAreaView>
             <ScrollView>
                 <View>
-                    <View>
-                        <TouchableOpacity>
-                            <GoogleSigninButton
-                                style={{ width: 192, height: 48 }}
-                                size={GoogleSigninButton.Size.Wide}
-                                color={GoogleSigninButton.Color.Dark}
-                                onPress={() => configureGoogle()}
-                                disabled={false} 
-                            />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity>
+                        <GoogleSigninButton
+                            style={{ width: 192, height: 48 }}
+                            size={GoogleSigninButton.Size.Wide}
+                            color={GoogleSigninButton.Color.Dark}
+                            onPress={() => configureGoogle()}
+                            disabled={false} 
+                        />
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
