@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+
 import {
     View,
     Text,
@@ -6,6 +7,8 @@ import {
     ScrollView,
     TouchableOpacity
 } from 'react-native';
+
+import { Dimensions } from 'react-native';
 
 import {
     styles, 
@@ -17,27 +20,31 @@ import {
     isIphoneX 
 } from '../styles/styles';
 
-import { GoogleSignin, statusCodes, GoogleSigninButton  } from 'react-native-login-google';
+import { 
+    GoogleSignin, 
+    statusCodes, 
+    GoogleSigninButton  
+} from 'react-native-login-google';
 
 const LoginScreen = () =>{
 
-    const configureGoogle = () =>{
-        configGoogle();
-        signIn();
-    }
+    const [loginGoogle, setLoginGoogle] = useState(false);
+    const [password, setpassword] = useState('');
+    const [email, setEmail] = useState('');
 
+    const windowWidth = Dimensions.get('window').width;
+
+    useEffect(()=>{
+        configGoogle(); 
+        isSignedIn()
+    },[])
 
     const configGoogle = () =>{
         try {
             GoogleSignin.configure({
                 scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
-                webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
+                webClientId: '199911427187-omvh48nf6ivjp0eh0uj0itsqlchmis8f.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
                 offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-                hostedDomain: '', // specifies a hosted domain restriction
-                loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
-                forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login.
-                accountName: '', // [Android] specifies an account name on the device that should be used
-                iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
               });
         } catch (error) {
             console.warn(error.message)
@@ -66,16 +73,30 @@ const LoginScreen = () =>{
         }
     };
 
+    const signOut = async () => {
+        try {
+          await GoogleSignin.revokeAccess();
+          await GoogleSignin.signOut();
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
+    const isSignedIn = async () => {
+        const isSignedIn = await GoogleSignin.isSignedIn();
+        setLoginGoogle(isSignedIn)
+    };
+
     return(
         <SafeAreaView>
             <ScrollView>
                 <View>
                     <TouchableOpacity>
                         <GoogleSigninButton
-                            style={{ width: 192, height: 48 }}
+                            style={{ width: windowWidth, height: 55 }}
                             size={GoogleSigninButton.Size.Wide}
                             color={GoogleSigninButton.Color.Dark}
-                            onPress={() => configureGoogle()}
+                            onPress={() => signIn()}
                             disabled={false} 
                         />
                     </TouchableOpacity>

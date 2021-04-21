@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "199911427187-fsmog4kuovv3a5k0s7l6efif3js6rtqo.apps.googleusercontent.com",
+          "client_id": "199911427187-3ini29c0qh48on4t8i6i5o47qmlt6rug.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.balcchealthapp",
-            "certificate_hash": "f3885cdd30460d9e2c5bc98692c80d8f5cf79d75"
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {
