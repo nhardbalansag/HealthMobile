@@ -18,8 +18,7 @@ import {
 const AppTitle = () =>{
     return(
         <View style={[styles.flexColumn, styles.alignCenter]}>
-            <Text style={[styles.font40, styles.textBold, {color:colors.goldenrod}]}>BALCC</Text>
-            <Text style={[styles.font40, styles.textBold, {color:colors.goldenrod}]}>CARE</Text>
+            <Text style={[styles.font40, styles.textBold, {color:colors.canvaColorBlue}]}>We Care</Text>
         </View>
     );
 }

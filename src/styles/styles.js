@@ -1,5 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+// text color canva #1e0078
+// upp background color canva #00d1ff
+// down background color canva #6559ff
+
 // colors
 const baseColor    = '#f4f4f4';
 const lightColor   = '#fff';
@@ -21,6 +25,9 @@ const gray500      = '#f8f9fa';
 const gray600      = '#818181';
 const blue100      = '#EAF5FF'; 
 const goldenrod    = '#daa520'; 
+const canvaColorBlue   = '#1e0078'; 
+const canvaupperBG   = '#00d1ff'; 
+const canvalowerBG   = '#6559ff'; 
 
 const colors = {
   baseColor   : baseColor,
@@ -43,6 +50,9 @@ const colors = {
   gray600     : gray600,
   blue100     : blue100,
   goldenrod   : goldenrod,
+  canvaColorBlue   : canvaColorBlue,
+  canvaupperBG   : canvaupperBG,
+  canvalowerBG   : canvalowerBG,
 };
 
 const PLATFORM = {

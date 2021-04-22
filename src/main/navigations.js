@@ -26,7 +26,17 @@ const Tab = createBottomTabNavigator();
 const loginRegister = () =>{
    return(
     <Stack.Navigator>
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Login' }}/>
+        <Stack.Screen 
+            name="LoginScreen" 
+            component={LoginScreen} 
+            options={{ 
+                title: 'Login',
+                headerTintColor: colors.lightColor,
+                headerStyle: {
+                    backgroundColor: colors.canvaupperBG,
+                }
+            }}
+        />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'Register' }}/>
     </Stack.Navigator>
    );
