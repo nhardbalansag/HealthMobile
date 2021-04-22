@@ -136,13 +136,15 @@ const LoginScreen = () =>{
 
     return(
       <ImageBackground 
-        source={require('../styles/image/BALCC.png')} 
         style={
           [{
             flex: 1,
             resizeMode: "cover",
-            justifyContent: "center"}]}>
-          <SafeAreaView>
+            justifyContent: "center"
+          }]}
+        source={require('../styles/image/BALCC.png')} 
+      >
+          <SafeAreaView>  
             <ScrollView>
               <View style={[styles.flex1, styles.justifyCenter]}>
                 <View>
