@@ -5,7 +5,8 @@ import {
     Text,
     SafeAreaView,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
@@ -26,13 +27,19 @@ import {
     GoogleSigninButton  
 } from 'react-native-login-google';
 
+import { SocialIcon } from 'react-native-elements'
+
+import { LoginManager, AccessToken  } from "react-native-fbsdk";
+
+import AppTitle from '../components/appTitle';
+
 const LoginScreen = () =>{
+
+    const windowWidth = Dimensions.get('window').width; 
 
     const [loginGoogle, setLoginGoogle] = useState(false);
     const [password, setpassword] = useState('');
     const [email, setEmail] = useState('');
-
-    const windowWidth = Dimensions.get('window').width;
 
     useEffect(()=>{
         configGoogle(); 
@@ -87,22 +94,84 @@ const LoginScreen = () =>{
         setLoginGoogle(isSignedIn)
     };
 
+    const loginFacebook = () => {
+      LoginManager.logInWithPermissions(["public_profile"]).then(
+        function(result) {
+          if (result.isCancelled) {
+            console.log("Login cancelled");
+          } else {
+            AccessToken.getCurrentAccessToken().then(
+              (data) => {
+                // console.log(data.accessToken.toString())
+                loginFacebookInfo(data.accessToken)
+              }
+            )
+          }
+        },
+        function(error) {
+          console.log("Login fail with error: " + error);
+        }
+      );
+    }
+
+    const loginFacebookInfo = (token) => {
+        fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
+        .then((response) => response.json())
+        .then((json) => {
+          // Some user object has been set up somewhere, build that user here
+          // FacebookInfo.name = json.name
+          // FacebookInfo.id = json.id
+          // FacebookInfo.user_friends = json.friends
+          // FacebookInfo.email = json.email
+          // FacebookInfo.username = json.name
+          // FacebookInfo.loading = false
+          // FacebookInfo.loggedIn = true
+          // FacebookInfo.avatar = setAvatar(json.id)      
+          console.warn(json.name)
+        })
+        .catch(() => {
+          reject('ERROR GETTING DATA FROM FACEBOOK')
+        })
+    }
+
     return(
-        <SafeAreaView>
+      <ImageBackground 
+        source={require('../styles/image/BALCC.png')} 
+        style={
+          [{
+            flex: 1,
+            resizeMode: "cover",
+            justifyContent: "center"}]}>
+          <SafeAreaView>
             <ScrollView>
+              <View style={[styles.flex1, styles.justifyCenter]}>
                 <View>
+                    <TouchableOpacity onPress={() => loginFacebook()}>
+                      <SocialIcon
+                        title='Sign In With Facebook'
+                        button
+                        type='facebook'
+                      />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => signIn()}>
+                      <SocialIcon
+                        title='Sign In With Google'
+                        button
+                        type='google'
+                      />
+                    </TouchableOpacity>
+                    <View>
+                      <Text style={[styles.font19, styles.textCenter]}>OR</Text>
+                    </View>
                     <TouchableOpacity>
-                        <GoogleSigninButton
-                            style={{ width: windowWidth, height: 55 }}
-                            size={GoogleSigninButton.Size.Wide}
-                            color={GoogleSigninButton.Color.Dark}
-                            onPress={() => signIn()}
-                            disabled={false} 
-                        />
+                        <Text style={[styles.textBold, styles.font19, styles.textCenter]}>Create an Account</Text>
                     </TouchableOpacity>
                 </View>
+              </View>
             </ScrollView>
-        </SafeAreaView>
+          </SafeAreaView>
+        </ImageBackground>
     );
 }
 
